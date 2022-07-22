@@ -5,7 +5,7 @@ import {
   } from "./actionTypes";
   
   export interface IEmp {
-    empId: string;
+    // id: string;
     name: string;
     gender: string;
     salary:number;

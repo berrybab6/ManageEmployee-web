@@ -26,7 +26,7 @@ const App = () => {
         <div>Error</div>
       ) : (
         employees.map((emp, index) => (
-          <div style={{ marginBottom: "10px" }} key={emp.empId}>
+          <div style={{ marginBottom: "10px" }} key={emp.name}>
             {++index}. {emp.name}
           </div>
         ))

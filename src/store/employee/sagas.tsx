@@ -6,7 +6,7 @@ import { FETCH_EMP_REQUEST } from "./actionTypes";
 import { IEmp } from "./types";
 
 const getEmployees = () =>
-  axios.get<IEmp[]>("https://jsonplaceholder.typicode.com/emp");
+  axios.get<IEmp[]>("http://localhost:5000/");
 
 /*
   Worker Saga: Fied on FETCH_TODO_REQUEST action
