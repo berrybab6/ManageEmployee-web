@@ -1,26 +1,38 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-function App() {
+import {
+  getPendingSelector,
+  getEmpSelector,
+  getErrorSelector,
+} from "./store/employee/selectors";
+import { fetchEmpRequest } from "./store/employee/actions";
+
+const App = () => {
+  const dispatch = useDispatch();
+  const pending = useSelector(getPendingSelector);
+  const employees = useSelector(getEmpSelector);
+  const error = useSelector(getErrorSelector);
+
+  useEffect(() => {
+    dispatch(fetchEmpRequest());
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div style={{ padding: "15px" }}>
+      {pending ? (
+        <div>Loading...</div>
+      ) : error ? (
+        <div>Error</div>
+      ) : (
+        employees.map((emp, index) => (
+          <div style={{ marginBottom: "10px" }} key={emp.empId}>
+            {++index}. {emp.name}
+          </div>
+        ))
+      )}
     </div>
   );
-}
+};
 
 export default App;

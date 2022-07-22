@@ -1,9 +1,9 @@
 import { combineReducers } from "redux";
 
-import todoReducer from "./employee/reducer";
+import employeeReducer from "./employee/reducer";
 
 const rootReducer = combineReducers({
-  todo: todoReducer,
+  employee: employeeReducer,
 });
 
 export type AppState = ReturnType<typeof rootReducer>;
