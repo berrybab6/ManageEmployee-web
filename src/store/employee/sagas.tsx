@@ -6,14 +6,14 @@ import { FETCH_EMP_REQUEST } from "./actionTypes";
 import { IEmp } from "./types";
 
 const getEmployees = () =>
-  axios.get<IEmp[]>("http://localhost:5000/");
+  axios.get<IEmp[]>("http://192.168.0.16:5000/");
 
 /*
   Worker Saga: Fied on FETCH_TODO_REQUEST action
 */
-function* fetchEmpSaga() {
+function* fetchEmpSaga():any {
   try {
-    const { response, error } = yield call(getEmployees)
+    const response = yield call(getEmployees);
     yield put(
       fetchEmpSuccess({
         employees: response.data,
