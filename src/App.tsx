@@ -22,8 +22,8 @@ const App = () => {
 
   return (
     <div className="App">
-     {/* <Employees /> */}
-     <EmployeeTable />     
+     <Employees />
+     {/* <EmployeeTable />      */}
     </div>
   );
 };
