@@ -1,6 +1,9 @@
 import React, { useEffect } from "react";
 import { EmpCard } from "./empcard";
-import {AddEmpButton} from "./button"
+import {ButtonContainer, Button} from "./button"
+
+import { Modal } from './addEmployee';
+import { useModal } from './useModal';
 
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
@@ -30,13 +33,21 @@ export default function Employees() {
       
     }, []);
 
+    const { isShown, toggle } = useModal();
+    const content = <React.Fragment>Hey, I'm a model.</React.Fragment>;
 
   return (
-    <LelaContainer >
+       <LelaContainer >
       <h1>Employee Information</h1>
       
-      <AddEmpButton />
+      <ButtonContainer >
+          <Button onClick={toggle}>Add Employee</Button>
+    </ButtonContainer>
+
+      <Modal isShown={isShown} hide={toggle} modalContent={content} headerText="Hello"/>
      <EmployeeTable />
     </LelaContainer>
+
+  
   );
 }

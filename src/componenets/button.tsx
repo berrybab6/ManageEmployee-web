@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const ButtonContainer = styled.div`
+export const ButtonContainer = styled.div`
   background: none;
 
   display: flex;
@@ -10,7 +10,7 @@ const ButtonContainer = styled.div`
   justify-content: flex-end;
 
 `;
-const Button = styled.button`
+export const Button = styled.button`
   display: block;
   color:  #5930e5;
   font-size: 1em;
