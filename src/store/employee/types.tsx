@@ -2,6 +2,10 @@ import {
     FETCH_EMP_REQUEST,
     FETCH_EMP_SUCCESS,
     FETCH_EMP_FAILURE,
+
+    DELETE_EMP_SUCCESS,
+    DELETE_EMP_REQUEST,
+    DELETE_EMP_FAILURE,
   } from "./actionTypes";
   
   export interface IEmp {
@@ -15,13 +19,15 @@ import {
   export interface EmpState {
     pending: boolean;
     employees: IEmp[];
+    message : string | null;
     error: string | null;
   }
+  //  ############# GET Employees  ###########3
   
   export interface FetchEmpSuccessPayload {
     employees: IEmp[];
   }
-  
+ 
   export interface FetchEmpFailurePayload {
     error: string;
   }
@@ -39,8 +45,35 @@ import {
     type: typeof FETCH_EMP_FAILURE;
     payload: FetchEmpFailurePayload;
   };
+
+// ################# DELETE EMPLOYMENT Type and interfaces #########3
+  export interface DeleteEmpRequest {
+    type: typeof DELETE_EMP_REQUEST;
+  }
+  
+  export interface DeleteEmpFailurePayload {
+    error: string;
+  }
+  
+
+  export interface DeleteEmpSuccessPayload {
+    message: string;
+  }
+  export type DeleteEmpSuccess = {
+    type: typeof DELETE_EMP_SUCCESS;
+    payload: DeleteEmpSuccessPayload;
+  };
+  export type DeleteEmpFailure = {
+    type: typeof DELETE_EMP_FAILURE;
+    payload: DeleteEmpFailurePayload;
+  };
+
   
   export type EmpActions =
     | FetchEmpRequest
     | FetchEmpSuccess
-    | FetchEmpFailure;
+    | FetchEmpFailure
+    | DeleteEmpRequest
+    | DeleteEmpSuccess
+    | DeleteEmpFailure
+    ;

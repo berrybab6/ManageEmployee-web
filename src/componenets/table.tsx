@@ -83,6 +83,8 @@ export default function EmployeeTable() {
     const TableHead = styled.thead`
     `;
     const TableRow = styled.tr`
+    border: 1px solid black;
+
     `;
     
     const TableHeading = styled.th`
@@ -91,13 +93,19 @@ export default function EmployeeTable() {
     text-align: center;
     border: 1px solid LightGrey;
     `;
+
     
     const TableHeadingBody = styled.th`
     padding:15px 10px 15px 10px;
     color:#000;
     text-align: center;
-    border: none;
+    border: 1px solid lightGrey;
+
+    // border: none;
     `;
+  const EditDeleteRow = styled(TableHeadingBody)`
+    padding: 0 5px 0 5px;
+`;
     
     
 const CardStatWrapper = styled.div`
@@ -131,7 +139,7 @@ const Button = styled.button`
   display: inline-block;
   color:  #5930e5;
   font-size: 1em;
-  align-items:cente;
+  align-items:center;
   padding: 0.35em 1em;
   border: 2px solid #5930e5;
   border-radius: 3px;
@@ -143,6 +151,7 @@ const DeleteButton = styled(Button)`
   color: red;
   border-color: tomato;
 `;
+
 
 const dispatch = useDispatch();
 const pending = useSelector(getPendingSelector);
@@ -201,17 +210,19 @@ const start = new Date(Date.now());
                                       {employees[i].DoB.toString()}
                                       </TableHeadingBody>
 
-                                      <th >
+                                      <EditDeleteRow >
                                          <CardStatWrapper>
                                          <CardStats>
       
                                           <Button >update</Button>
                                         </CardStats>
                                         <CardStats>
-                                          <DeleteButton >delete</DeleteButton>
+                                          <DeleteButton onClick={()=>{
+                                            console.log("Delete Employee");
+                                          }}>delete</DeleteButton>
                                         </CardStats>
                                          </CardStatWrapper>
-                                      </th>
+                                      </EditDeleteRow>
                                       
                                       
                                    
