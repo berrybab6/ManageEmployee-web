@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import styled from "styled-components";
 
@@ -8,12 +8,12 @@ import {
   getEmpSelector,
   getErrorSelector,
 } from "../store/employee/selectors"
-import { fetchEmpRequest } from "../store/employee/actions";
+import { deleteEmpRequest, fetchEmpRequest } from "../store/employee/actions";
+import { connect } from 'react-redux';
+export default function EmployeeTable(props:any){
 
 
-
-
-export default function EmployeeTable() {
+// export default function EmployeeTable(props:any) {
     // const users = useSelector(state => state.users);
 
     // const user = useSelector(state => state.authentication.user);
@@ -24,46 +24,17 @@ export default function EmployeeTable() {
     const [isEmpty, setIsEmpty] = useState(true);
     const [isError, setError] = useState(false);
     const [users , setUsers] = useState([]);
-    useEffect(() => {
-        // mounted.current = true;
-        const url = `http://localhost:8000/v1/admins/custom_users/`;
-
-
-        const fetchData = async () => {
-            setIsLoading(true);
-
-          try {
-            const response = await fetch(url);
-           
-            const json = await response.json();
-            setUsers(json.users);
-
-            if(users.length>0){
-                setIsEmpty(false)
-            }else{
-                setIsEmpty(true);
-            }
-           
-            // console.log("Sectors: ", json.sectors[0].district_name);
-          } catch (error) {
-            console.log("error", error);
-            setError(true);
-          }
-        };
-
-
-          fetchData();
-          setTimeout(() => {
-            setIsLoading(false);            
-        }, 1500);
-        
-    }, []);
+  
     const [msg, setMsg] = useState('');
   
-    function handleDeleteCancel() {
-
-        setSubmitted(false)
-
+    function handleDelete(empId:string) {
+      console.log(empId);
+      dispatch(deleteEmpRequest({
+        values:{
+          id:empId
+        },
+        callback
+      }));
     }
     const [submitted, setSubmitted] = useState(false);
     const [register, setRegister] = useState(false);
@@ -157,10 +128,29 @@ const dispatch = useDispatch();
 const pending = useSelector(getPendingSelector);
 const employees = useSelector(getEmpSelector);
 const error = useSelector(getErrorSelector);
+const idRef = useRef();
+const [empId, setEmpId] = useState("");
+
+const deleteE =(userId:string)=>{
+  let data:any = {
+    values:{
+      id:userId
+    },
+    callback
+  }
+  props.deleteE(data);
+};
 
 useEffect(() => {
   dispatch(fetchEmpRequest());
+  
 }, []);
+
+const callback =(data:any)=>{
+  console.log("DELETsE an Employee");
+}
+
+
 const start = new Date(Date.now());
 
 
@@ -204,7 +194,7 @@ const start = new Date(Date.now());
                                       {employees[i].salary}
                                       </TableHeadingBody>
                                       <TableHeadingBody >
-                                      {employees[i].gender}
+                                      {employees[i]._id}
                                       </TableHeadingBody>
                                       <TableHeadingBody >
                                       {employees[i].DoB.toString()}
@@ -219,6 +209,8 @@ const start = new Date(Date.now());
                                         <CardStats>
                                           <DeleteButton onClick={()=>{
                                             console.log("Delete Employee");
+                                            // deleteE(employees[i]._id)
+                                            handleDelete(employees[i]._id)
                                           }}>delete</DeleteButton>
                                         </CardStats>
                                          </CardStatWrapper>
@@ -237,7 +229,14 @@ const start = new Date(Date.now());
                 </TableContainer>
       ))
     }
-               
-            
+          
                               
 }
+
+// const mapDispatchToProps=(dispatch:any)=>({
+//   deleteE:(params:any)=>{
+//     dispatch(deleteEmpRequest(params))
+//   }
+// })
+
+// export default connect(null, mapDispatchToProps)(EmployeeTable);

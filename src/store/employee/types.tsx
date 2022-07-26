@@ -47,8 +47,13 @@ import {
   };
 
 // ################# DELETE EMPLOYMENT Type and interfaces #########3
-  export interface DeleteEmpRequest {
+export interface DeletePayload{
+  values: {id:string};
+  callback: any;
+}  
+export interface DeleteEmpRequest {
     type: typeof DELETE_EMP_REQUEST;
+    payload:DeletePayload;
   }
   
   export interface DeleteEmpFailurePayload {

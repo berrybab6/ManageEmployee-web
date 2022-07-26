@@ -23,18 +23,7 @@ const App = () => {
   return (
     <div className="App">
      {/* <Employees /> */}
-     <EmployeeTable />
-      {/* {pending ? (
-        <div>Loading...</div>
-      ) : error ? (
-        <div>Error</div>
-      ) : (
-        employees.map((emp, index) => (
-          <div style={{ marginBottom: "10px" }} key={emp.name}>
-            {++index}. {emp.name}
-          </div>
-        ))
-      )} */}
+     <EmployeeTable />     
     </div>
   );
 };
