@@ -9,6 +9,7 @@ import {
 } from "./store/employee/selectors";
 import { fetchEmpRequest } from "./store/employee/actions";
 import Employees from "./componenets/employees"
+import EmployeeTable from "./componenets/table";
 const App = () => {
   const dispatch = useDispatch();
   const pending = useSelector(getPendingSelector);
@@ -21,7 +22,8 @@ const App = () => {
 
   return (
     <div className="App">
-     <Employees />
+     {/* <Employees /> */}
+     <EmployeeTable />
       {/* {pending ? (
         <div>Loading...</div>
       ) : error ? (

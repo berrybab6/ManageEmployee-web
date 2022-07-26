@@ -1,12 +1,14 @@
 import styled from "styled-components";
 
 export const CardWrapper = styled.div`
-  display: grid;
+  display: flex;
   grid-template-columns: 300px;
-  grid-template-rows: 210px 210px 80px;
-  grid-template-areas: "image" "text" "stats";
+  grid-template-rows: 210px 210px 100px;
+  grid-template-areas:"text" "text" ;
   border-radius: 18px;
   background: #000;
+  flex-direction: column;
+
   box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.9);
   text-align: center;
 `;
