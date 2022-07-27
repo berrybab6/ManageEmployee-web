@@ -30,6 +30,26 @@ import {
     
   } from "./types";
   
+
+
+
+  import {
+    ADD_EMP_REQUEST,
+    ADD_EMP_FAILURE,
+    ADD_EMP_SUCCESS,
+  } from "./actionTypes";
+
+  import {
+    AddEmpRequest,
+    AddEmpSuccess,
+    AddPayload,
+    AddEmpSuccessPayload,
+    AddEmpFailure,
+    AddEmpFailurePayload,
+
+    
+  } from "./types";
+  
   export const fetchEmpRequest = (): FetchEmpRequest => ({
     type: FETCH_EMP_REQUEST,
   });
@@ -69,5 +89,30 @@ import {
     payload: DeleteEmpFailurePayload
   ): DeleteEmpFailure => ({
     type: DELETE_EMP_FAILURE,
+    payload,
+  });
+
+
+
+
+
+  // ######## ADD EMPLOYEE Payload
+  
+  export const addEmpRequest = (payload:AddPayload): AddEmpRequest => ({
+    type: ADD_EMP_REQUEST,
+    payload
+  });
+  
+  export const addEmpSuccess = (
+    payload: AddEmpSuccessPayload
+  ): AddEmpSuccess => ({
+    type: ADD_EMP_SUCCESS,
+    payload,
+  });
+  
+  export const addEmpFailure = (
+    payload: AddEmpFailurePayload
+  ): AddEmpFailure => ({
+    type: ADD_EMP_FAILURE,
     payload,
   });
