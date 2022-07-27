@@ -13,9 +13,11 @@ export default function AddEmployeeForm() {
     
     const [inputs, setInputs] = useState({
         empName: '',
-        salary: '',
+        salary: 0,
         gender: ''
     });
+    const [startDate, setStartDate] = useState(new Date());
+
     const [submitted, setSubmitted] = useState(false);
     const { empName, salary, gender } = inputs;
     function handleChange(e:any) {
@@ -43,7 +45,6 @@ export default function AddEmployeeForm() {
     //     return (isValidPhoneNumber)
     // }
 
-    const [startDate, setStartDate] = useState(new Date());
     return (
 
         <div className="basis-1/2 md:basis-1/3">
@@ -62,7 +63,7 @@ export default function AddEmployeeForm() {
                     <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="salary">
                         Salary
                     </label>
-                    <Input name="salary" value={salary} onChange={handleChange} className="form-control shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="salary" type="text" placeholder="salary" />
+                    <Input name="salary" value={salary} type="number" onChange={handleChange} className="form-control shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="salary" placeholder="salary" />
                     {/* {submitted && !salary &&
                         <div className="mt-2 text-sm text-red-600">Employee Salary is required</div>
                     } */}

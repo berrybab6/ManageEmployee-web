@@ -1,3 +1,4 @@
+import internal from "stream";
 import {
     FETCH_EMP_REQUEST,
     FETCH_EMP_SUCCESS,
@@ -6,6 +7,10 @@ import {
     DELETE_EMP_SUCCESS,
     DELETE_EMP_REQUEST,
     DELETE_EMP_FAILURE,
+
+    ADD_EMP_SUCCESS,
+    ADD_EMP_REQUEST,
+    ADD_EMP_FAILURE,
   } from "./actionTypes";
   
   export interface IEmp {
@@ -73,6 +78,35 @@ export interface DeleteEmpRequest {
     payload: DeleteEmpFailurePayload;
   };
 
+
+
+// ################# ADD EMPLOYMENT Type and interfaces #########4
+export interface AddPayload{
+  values: {name:string,salary:number, gender:string,DoB:Date};
+  callback: any;
+}  
+export interface AddEmpRequest {
+    type: typeof ADD_EMP_REQUEST;
+    payload:AddPayload;
+  }
+  
+  export interface AddEmpFailurePayload {
+    error: string;
+  }
+  
+
+  export interface AddEmpSuccessPayload {
+    message: string;
+  }
+  export type AddEmpSuccess = {
+    type: typeof ADD_EMP_SUCCESS;
+    payload: AddEmpSuccessPayload;
+  };
+  export type AddEmpFailure = {
+    type: typeof ADD_EMP_FAILURE;
+    payload: AddEmpFailurePayload;
+  };
+
   
   export type EmpActions =
     | FetchEmpRequest
@@ -81,4 +115,7 @@ export interface DeleteEmpRequest {
     | DeleteEmpRequest
     | DeleteEmpSuccess
     | DeleteEmpFailure
+    | AddEmpRequest
+    | AddEmpSuccess
+    | AddEmpFailure
     ;
