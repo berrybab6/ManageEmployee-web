@@ -126,6 +126,8 @@ function* addEmpSaga(action:any) {
 function* empSaga() {
   yield all([takeLatest(FETCH_EMP_REQUEST, fetchEmpSaga)]);
   yield all([takeLatest(DELETE_EMP_REQUEST, deleteEmpSaga)]);
+  yield all([takeLatest(ADD_EMP_REQUEST, addEmpSaga)]);
+
 
 }
 
