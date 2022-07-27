@@ -5,11 +5,13 @@ import { all, call, put, takeLatest } from "redux-saga/effects";
 import { fetchEmpFailure, fetchEmpSuccess } from "./actions";
 import { deleteEmpFailure, deleteEmpSuccess } from "./actions";
 import { addEmpFailure, addEmpSuccess } from "./actions";
+import { updateEmpFailure, updateEmpSuccess } from "./actions";
 
 import { DELETE_EMP_REQUEST } from "./actionTypes";
 
 import { FETCH_EMP_REQUEST } from "./actionTypes";
 import { ADD_EMP_REQUEST } from "./actionTypes";
+import { UPDATE_EMP_REQUEST } from "./actionTypes";
 
 import { IEmp } from "./types";
 
@@ -28,10 +30,20 @@ const getEmployees = () =>
   
   const addEmp= async (payload:{name:string, salary:number, gender:string, DoB:Date}) =>{
     
-    // const i= payload["id"]
-    // const myJSON:string = JSON.stringify(i);
- 
     const { data }  = await axios.post<IEmp>(`http://192.168.0.16:5000/`,{...payload},
+    {
+      headers:{
+        "Content-Type":"application/json",
+        Accept:"application/json",
+      }
+    });
+    
+    return data;
+  } 
+  
+  const updateEmp= async (payload:{name:string, salary:number, gender:string, DoB:Date}) =>{
+    
+    const { data }  = await axios.patch<IEmp>(`http://192.168.0.16:5000/`,{...payload},
     {
       headers:{
         "Content-Type":"application/json",
@@ -111,6 +123,36 @@ function* addEmpSaga(action:any) {
   } catch (e) {
     yield put(
       addEmpFailure({
+        error:"Unable to Update Employees",
+      })
+    );
+  }
+}
+
+
+
+function* updateEmpSaga(action:any) {
+  try {
+    console.log("IDDD");
+    console.log(action.payload.values);
+    const response:{message:string} = yield call(updateEmp,
+      {name:action.payload.values.name,
+      salary:action.payload.values.salary,
+      gender:action.payload.values.gender,
+      DoB:action.payload.values.DoB
+    });
+    
+    yield put(
+      updateEmpSuccess({
+        message: response.message,
+      })
+    );
+
+    action.payload.callback(response.message);
+
+  } catch (e) {
+    yield put(
+      updateEmpFailure({
         error:"Unable to Add Employees",
       })
     );
@@ -127,6 +169,8 @@ function* empSaga() {
   yield all([takeLatest(FETCH_EMP_REQUEST, fetchEmpSaga)]);
   yield all([takeLatest(DELETE_EMP_REQUEST, deleteEmpSaga)]);
   yield all([takeLatest(ADD_EMP_REQUEST, addEmpSaga)]);
+  yield all([takeLatest(UPDATE_EMP_REQUEST, updateEmpSaga)]);
+
 
 
 }

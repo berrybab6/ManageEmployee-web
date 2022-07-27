@@ -136,3 +136,28 @@ import {
     type: ADD_EMP_FAILURE,
     payload,
   });
+
+
+
+
+
+  // ######## UPDATTE EMPLOYEE Payload
+  
+  export const updateEmpRequest = (payload:UpdatePayload): UpdateEmpRequest => ({
+    type: UPDATE_EMP_REQUEST,
+    payload
+  });
+  
+  export const updateEmpSuccess = (
+    payload: UpdateEmpSuccessPayload
+  ): UpdateEmpSuccess => ({
+    type: UPDATE_EMP_SUCCESS,
+    payload,
+  });
+  
+  export const updateEmpFailure = (
+    payload: UpdateEmpFailurePayload
+  ): UpdateEmpFailure => ({
+    type: UPDATE_EMP_FAILURE,
+    payload,
+  });

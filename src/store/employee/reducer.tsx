@@ -10,6 +10,11 @@ import {
     ADD_EMP_REQUEST,
     ADD_EMP_SUCCESS,
     ADD_EMP_FAILURE,
+
+    UPDATE_EMP_REQUEST,
+    UPDATE_EMP_SUCCESS,
+    UPDATE_EMP_FAILURE,
+
   } from "./actionTypes";
   
   import { EmpActions, EmpState } from "./types";
@@ -78,6 +83,27 @@ import {
             error: null,
           };
         case ADD_EMP_FAILURE:
+          return {
+            ...state,
+            pending: false,
+            message:null,
+            error: action.payload.error,
+          };
+
+               // ######## UPDATE Employeee Reducer
+        case UPDATE_EMP_REQUEST:
+          return {
+            ...state,
+            pending: true,
+          };
+        case UPDATE_EMP_SUCCESS:
+          return {
+            ...state,
+            pending: false,
+            message: action.payload.message,
+            error: null,
+          };
+        case UPDATE_EMP_FAILURE:
           return {
             ...state,
             pending: false,
