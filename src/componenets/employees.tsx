@@ -1,19 +1,11 @@
 import React, { useEffect } from "react";
-import { EmpCard } from "./empcard";
 import {ButtonContainer, Button} from "./button"
 
 import { Modal } from './addEmployee';
 import { useModal } from './useModal';
 
 import styled from "styled-components";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  getPendingSelector,
-  getEmpSelector,
-  getErrorSelector,
-} from "../store/employee/selectors"
-import { fetchEmpRequest } from "../store/employee/actions";
-import { TableContainer } from "./tableStyles";
+
 import EmployeeTable from "./table";
 
  

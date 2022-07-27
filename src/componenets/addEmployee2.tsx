@@ -8,6 +8,14 @@ import "react-datepicker/dist/react-datepicker.css";
 // import { useForm } from "react-hook-form";
 import { FormGroup, Label, Input, Message } from "./forms";
 
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getEmpSelector,
+  getErrorSelector,
+} from "../store/employee/selectors"
+
+import { addEmpRequest, fetchEmpRequest } from "../store/employee/actions";
+
 export default function AddEmployeeForm() {
     // const { register, handleSubmit, formState: { errors } } = useForm();
     
@@ -25,6 +33,15 @@ export default function AddEmployeeForm() {
         setInputs(inputs => ({ ...inputs, [name]: value }));
     }
 
+const dispatch = useDispatch();
+const employees = useSelector(getEmpSelector);
+const error = useSelector(getErrorSelector);
+
+
+const callback =(data:any)=>{
+    console.log("an Employee Created Succesfully");
+  }
+  
     function handleSubmit(e:any) {
         e.preventDefault();
 
@@ -32,6 +49,22 @@ export default function AddEmployeeForm() {
         if (empName && salary && gender) {
             console.log('hello form is submmitted')
             // const { from } = location.state || { from: { pathname: "/" } };
+
+            
+            // if (window.confirm("Are you sure You want to delete?"))
+           
+            // if (window.confirm(`You have deleted user:${name}`))
+            dispatch(addEmpRequest({
+              values:{
+                name:empName,
+                salary:salary,
+                gender:gender,
+                DoB:startDate
+              },
+              callback
+            }));
+            window.location.reload();
+      
             // dispatch(userActions.login(username, password, from));
         }
     }
