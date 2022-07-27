@@ -4,9 +4,13 @@ import { all, call, put, takeLatest } from "redux-saga/effects";
 
 import { fetchEmpFailure, fetchEmpSuccess } from "./actions";
 import { deleteEmpFailure, deleteEmpSuccess } from "./actions";
+import { addEmpFailure, addEmpSuccess } from "./actions";
+
 import { DELETE_EMP_REQUEST } from "./actionTypes";
 
 import { FETCH_EMP_REQUEST } from "./actionTypes";
+import { ADD_EMP_REQUEST } from "./actionTypes";
+
 import { IEmp } from "./types";
 
 const getEmployees = () =>
@@ -21,7 +25,22 @@ const getEmployees = () =>
     
     return message;
   }
+  
+  const addEmp= async (payload:{name:string, salary:number, gender:string, DoB:Date}) =>{
     
+    // const i= payload["id"]
+    // const myJSON:string = JSON.stringify(i);
+ 
+    const { data }  = await axios.post<IEmp>(`http://192.168.0.16:5000/`,{...payload},
+    {
+      headers:{
+        "Content-Type":"application/json",
+        Accept:"application/json",
+      }
+    });
+    
+    return data;
+  } 
   
 
 
@@ -68,6 +87,36 @@ function* deleteEmpSaga(action:any) {
     );
   }
 }
+
+
+function* addEmpSaga(action:any) {
+  try {
+    console.log("IDDD");
+    console.log(action.payload.values);
+    const response:{message:string} = yield call(addEmp,
+      {name:action.payload.values.name,
+      salary:action.payload.values.salary,
+      gender:action.payload.values.gender,
+      DoB:action.payload.values.DoB
+    });
+    
+    yield put(
+      addEmpSuccess({
+        message: response.message,
+      })
+    );
+
+    action.payload.callback(response.message);
+
+  } catch (e) {
+    yield put(
+      addEmpFailure({
+        error:"Unable to Add Employees",
+      })
+    );
+  }
+}
+
 
 
 /*
