@@ -50,6 +50,26 @@ import {
     
   } from "./types";
   
+
+
+
+
+  import {
+    UPDATE_EMP_REQUEST,
+    UPDATE_EMP_FAILURE,
+    UPDATE_EMP_SUCCESS,
+  } from "./actionTypes";
+
+  import {
+    UpdateEmpRequest,
+    UpdateEmpSuccess,
+    UpdatePayload,
+    UpdateEmpSuccessPayload,
+    UpdateEmpFailure,
+    UpdateEmpFailurePayload,
+
+    
+  } from "./types";
   export const fetchEmpRequest = (): FetchEmpRequest => ({
     type: FETCH_EMP_REQUEST,
   });

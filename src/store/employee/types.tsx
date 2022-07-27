@@ -11,6 +11,11 @@ import {
     ADD_EMP_SUCCESS,
     ADD_EMP_REQUEST,
     ADD_EMP_FAILURE,
+
+
+    UPDATE_EMP_SUCCESS,
+    UPDATE_EMP_REQUEST,
+    UPDATE_EMP_FAILURE,
   } from "./actionTypes";
   
   export interface IEmp {
@@ -108,6 +113,34 @@ export interface AddEmpRequest {
   };
 
   
+
+  // ################# UPDATE EMPLOYMENT Type and interfaces #########4
+export interface UpdatePayload{
+  values: {name:string,salary:number, gender:string,DoB:Date};
+  callback: any;
+}  
+export interface UpdateEmpRequest {
+    type: typeof UPDATE_EMP_REQUEST;
+    payload:UpdatePayload;
+  }
+  
+  export interface UpdateEmpFailurePayload {
+    error: string;
+  }
+  
+
+  export interface UpdateEmpSuccessPayload {
+    message: string;
+  }
+  export type UpdateEmpSuccess = {
+    type: typeof UPDATE_EMP_SUCCESS;
+    payload: UpdateEmpSuccessPayload;
+  };
+  export type UpdateEmpFailure = {
+    type: typeof UPDATE_EMP_FAILURE;
+    payload: UpdateEmpFailurePayload;
+  };
+
   export type EmpActions =
     | FetchEmpRequest
     | FetchEmpSuccess
@@ -118,4 +151,7 @@ export interface AddEmpRequest {
     | AddEmpRequest
     | AddEmpSuccess
     | AddEmpFailure
+    | UpdateEmpRequest
+    | UpdateEmpSuccess
+    | UpdateEmpFailure
     ;

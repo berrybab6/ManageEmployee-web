@@ -15,7 +15,6 @@ import {Button,
    from "./tableStyles"
 import { useDispatch, useSelector } from "react-redux";
 import {
-  getPendingSelector,
   getEmpSelector,
   getErrorSelector,
 } from "../store/employee/selectors"
@@ -23,21 +22,7 @@ import { deleteEmpRequest, fetchEmpRequest } from "../store/employee/actions";
 import { connect } from 'react-redux';
 export default function EmployeeTable(props:any){
 
-
-// export default function EmployeeTable(props:any) {
-    // const users = useSelector(state => state.users);
-
-    // const user = useSelector(state => state.authentication.user);
-    // const dispatch = useDispatch();
-    
-    
-    const [isLoading, setIsLoading] = useState(false);
-    const [isEmpty, setIsEmpty] = useState(true);
-    const [isError, setError] = useState(false);
-    const [users , setUsers] = useState([]);
-  
-    const [msg, setMsg] = useState('');
-    
+ 
     function toDate(date:string) {
       return new Date(date).toDateString();
   }
@@ -115,8 +100,8 @@ const start = new Date(Date.now());
                                 { Object.keys(employees).map((oneKey, i) => {
                                     return (
                                     
-                      <tbody>
-                      <tr>
+                      <tbody key={employees[i]._id}>
+                      <tr >
                                       <TableHeadingBody >
                                          {employees[i].name}
                                       </TableHeadingBody>

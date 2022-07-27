@@ -1,18 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 // import Input from '@material-tailwind/react/Input';
-import {ButtonContainer, Button} from "./button"
+import { Button} from "./button"
 
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 // import { useForm } from "react-hook-form";
-import { FormGroup, Label, Input, Message } from "./forms";
+import {  Input } from "./forms";
 
-import { useDispatch, useSelector } from "react-redux";
-import {
-  getEmpSelector,
-  getErrorSelector,
-} from "../store/employee/selectors"
+import { useDispatch, } from "react-redux";
+
 
 import { addEmpRequest, fetchEmpRequest } from "../store/employee/actions";
 
@@ -34,10 +31,11 @@ export default function AddEmployeeForm() {
     }
 
 const dispatch = useDispatch();
-const employees = useSelector(getEmpSelector);
-const error = useSelector(getErrorSelector);
 
-
+useEffect(() => {
+    dispatch(fetchEmpRequest());
+    
+  }, []);
 const callback =(data:any)=>{
     console.log("an Employee Created Succesfully");
   }
@@ -48,12 +46,7 @@ const callback =(data:any)=>{
         setSubmitted(true);
         if (empName && salary && gender) {
             console.log('hello form is submmitted')
-            // const { from } = location.state || { from: { pathname: "/" } };
-
-            
-            // if (window.confirm("Are you sure You want to delete?"))
            
-            // if (window.confirm(`You have deleted user:${name}`))
             dispatch(addEmpRequest({
               values:{
                 name:empName,
@@ -68,15 +61,7 @@ const callback =(data:any)=>{
             // dispatch(userActions.login(username, password, from));
         }
     }
-    function setGender(event:any) {
-      console.log(event.target.value);
-    }
-
-    // function validatePhoneNumber(number) {
-    //     const isValidPhoneNumber = validator.isMobilePhone(number)
-    //     console.log(isValidPhoneNumber);
-    //     return (isValidPhoneNumber)
-    // }
+   
 
     return (
 
@@ -97,22 +82,17 @@ const callback =(data:any)=>{
                         Salary
                     </label>
                     <Input name="salary" value={salary} type="number" onChange={handleChange} className="form-control shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="salary" placeholder="salary" />
-                    {/* {submitted && !salary &&
-                        <div className="mt-2 text-sm text-red-600">Employee Salary is required</div>
-                    } */}
+                  
                 </div>
                 <div className="mb-6">
                     <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="gender">
                         Gender
                     </label>
                     <div onChange={handleChange}>
-                     <input type="radio" value="MALE" name="gender" onChange={handleChange}/> Male
-                    <input type="radio" value="FEMALE" name="gender" onChange={handleChange}/> Female
+                     <input type="radio" value="Male" name="gender" onChange={handleChange}/> Male
+                    <input type="radio" value="Female" name="gender" onChange={handleChange}/> Female
                     </div>
-                    {/* <Input name="phone" value={phone} onChange={handleChange} className="form-control shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="phone" type="text" placeholder="phone" />
-                    {submitted && !phone &&
-                        <div className="mt-2 text-sm text-red-600">phone is required</div>
-                    } */}
+                 
                 </div>
                 <div className="relative mt-4">
 
