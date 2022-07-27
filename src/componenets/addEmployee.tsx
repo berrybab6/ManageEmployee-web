@@ -11,6 +11,11 @@ import {
   Backdrop,
 } from './modal.styles';
 
+import { FormGroup, Label, Input, Message } from "./forms";
+import AddEmployeeForm from './addEmployee2';
+
+const message = "this is the validation message";
+
 export interface ModalProps {
   isShown: boolean;
   hide: () => void;
@@ -30,10 +35,31 @@ export const Modal: FunctionComponent<ModalProps> = ({
       <Wrapper>
         <StyledModal>
           <Header>
-            <HeaderText>{headerText}</HeaderText>
-            <CloseButton onClick={hide}>X</CloseButton>
+            <HeaderText></HeaderText>
+            <CloseButton onClick={hide}>❌</CloseButton>
           </Header>
-          <Content>{modalContent}</Content>
+          <Content>
+          Add Employee Form
+           </Content>
+          <Content >
+            <AddEmployeeForm />
+{/* 
+           <FormGroup>
+          <Label htmlFor="label">Name</Label>
+         <Input id="label" />
+          <Message>This is the validation message</Message>
+          </FormGroup>
+           <FormGroup>
+          <Label>Salary</Label>
+            <Input />
+            <Message>This is the validation message</Message>
+        </FormGroup>
+        <FormGroup>
+          <Label>Gender</Label>
+            <Input />
+            <Message>This is the validation message</Message>
+        </FormGroup> */}
+        </Content>
         </StyledModal>
       </Wrapper>
     </React.Fragment>

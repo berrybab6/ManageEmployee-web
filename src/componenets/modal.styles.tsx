@@ -6,7 +6,9 @@ export const Wrapper = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 700;
-  width: inherit;
+  border:solid 1px #5930e5;
+  border-radius:7px;
+  width: 400px;
   outline: 0;
 `;
 
@@ -38,7 +40,7 @@ export const Header = styled.div`
 export const HeaderText = styled.div`
   color: #fff;
   align-self: center;
-  color: lightgray;
+  color: black;
 `;
 
 export const CloseButton = styled.button`
