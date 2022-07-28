@@ -1,6 +1,4 @@
-import React, { useState, useEffect } from "react";
-import styled from "styled-components";
-// import Input from '@material-tailwind/react/Input';
+import  { useState, useEffect } from "react";
 import { Button} from "./button"
 
 import DatePicker from "react-datepicker";
@@ -34,8 +32,8 @@ const dispatch = useDispatch();
 useEffect(() => {
     dispatch(fetchEmpRequest());
     
-  }, []);
-const callback =(data:any)=>{
+  }, [dispatch]);
+const callback =(data:string)=>{
     if(isShown){
     console.log("an Employee Created Succesfully");}
     else if(isUpdateShown){
@@ -53,7 +51,7 @@ const callback =(data:any)=>{
                 values:{
                     id:data["id"],
                     name:empName?empName:data["name"],
-                    salary:salary==0?data["salary"]:salary,
+                    salary:salary===0?data["salary"]:salary,
                     gender:gender?gender:data["gender"],
                     DoB:startDate===new Date()?data["DoB"]:startDate
                 },

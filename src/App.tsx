@@ -1,15 +1,11 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { EmpCard } from "./componenets/empcard";
 import "./styles.css"
 import {
-  getPendingSelector,
   getEmpSelector,
-  getErrorSelector,
-} from "./store/employee/selectors";
+  } from "./store/employee/selectors";
 import { fetchEmpRequest } from "./store/employee/actions";
 import Employees from "./componenets/employees"
-import EmployeeTable from "./componenets/table";
 import styled from "styled-components";
 const App = () => {
   const ErrorM = styled.div`
@@ -25,7 +21,7 @@ const App = () => {
   const employees = useSelector(getEmpSelector);
   useEffect(() => {
     dispatch(fetchEmpRequest());
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className="App">
