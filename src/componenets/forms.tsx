@@ -3,17 +3,26 @@ import styled from "styled-components";
 
 export const FormGroup = styled.div`
 	color: palevioletred;
-    display: block;
+    display: flex;
 	width: 300px;
-	margin: 50px auto;
+	margin: 50px 0;
+`;
+
+export const DateDiv = styled.div`
+color: black;
+display: flex;
+flex-direction: column;
+
 `;
 
 export const Label = styled.label`
-	margin-bottom: 0.5em;
-	color: palevioletred;
-    display: block;
-`;
+	margin-top: 10px;
+    margin-bottom: 3px;
+	color: black;
+    display: flex;
+	flex-direction: column;
 
+`;
 
 export const Input = styled.input`
 	padding: 10px;

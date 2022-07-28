@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
-
+import styled from "styled-components";
 // import Input from '@material-tailwind/react/Input';
 import { Button} from "./button"
 
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 // import { useForm } from "react-hook-form";
-import {  Input } from "./forms";
+import {Label,DateDiv, Input } from "./forms";
 
 import { useDispatch, } from "react-redux";
 
@@ -82,45 +82,47 @@ const callback =(data:any)=>{
     }
    
 
+
+
     return (
 
         <div className="basis-1/2 md:basis-1/3">
             <form name="form" onSubmit={handleSubmit} className="basis-1/2 md:basis-1/3 bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
                 <div className="mb-8">
-                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="empName">
+                    <Label htmlFor="empName">
                         Employee Name
-                    </label>
-                    <Input name="empName" value={empName} onChange={handleChange} className="form-control shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="empName" type="text" placeholder="Employee Name" />
+                    </Label>
+                    <Input name="empName" value={empName} onChange={handleChange}  id="empName" type="text" placeholder="Employee Name" />
                     {submitted && !empName &&
                         <div className="mt-2 text-sm text-red-600">Employee Name is required</div>
                     }
                 </div>
-                <div className="mb-4">
+                <div className="mb-8 py-2 px-3">
 
-                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="salary">
+                    <Label  htmlFor="salary">
                         Salary
-                    </label>
-                    <Input name="salary" value={salary} type="number" onChange={handleChange} className="form-control shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="salary" placeholder="salary" />
+                    </Label>
+                    <Input name="salary" value={salary} type="number" onChange={handleChange} id="salary" placeholder="salary" />
                   
                 </div>
                 <div className="mb-6">
-                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="gender">
+                    <Label  htmlFor="gender">
                         Gender
-                    </label>
-                    <div onChange={handleChange}>
-                     <input type="radio" value="Male" name="gender" onChange={handleChange}/> Male
+                    </Label>
+                    <div onChange={handleChange} >
+                     <input type="radio" value="Male" name="gender"  onChange={handleChange}/> Male
                     <input type="radio" value="Female" name="gender" onChange={handleChange}/> Female
                     </div>
                  
                 </div>
-                <div className="relative mt-4">
+                <DateDiv>
 
-                    <label className="block text-gray-700 text-sm font-bold mb-2" >
+                    <Label  >
                         Select Date
-                    </label>
+                    </Label>
                     <DatePicker selected={startDate} onChange={(date:Date) => setStartDate(date)} />
 
-                </div>
+                </DateDiv>
 
                 <div className="flex items-center justify-between">
                     <Button onClick={function (e:any) {
