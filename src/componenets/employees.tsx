@@ -21,14 +21,11 @@ const LelaContainer = styled.div`
 
 export default function Employees() {
     
-    useEffect(() => {
-      
-    }, []);
 
     const { isShown, toggle } = useModal();
     const { isUpdateShown, toggleUpdate} = useUpdateModal();
     const [data, setEmpId] = useState({});
-    const content = <React.Fragment>Hey, I'm a model.</React.Fragment>;
+    const content = <React.Fragment>Employee Managment App</React.Fragment>;
 
   return (
        <LelaContainer >
@@ -40,8 +37,6 @@ export default function Employees() {
 
       <Modal isShown={isShown} isUpdateShown={isUpdateShown} hide={(isUpdateShown)?toggleUpdate:toggle}  modalContent={content} headerText="Hello" data={data}/>
      <EmployeeTable updateEmp={isUpdateShown} setUpdateEmp={toggleUpdate} setEmpId={setEmpId} />
-    </LelaContainer>
-
-  
+    </LelaContainer> 
   );
 }

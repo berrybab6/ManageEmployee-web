@@ -68,7 +68,7 @@ useEffect(() => {
   
 }, []);
 
-const callback =(data:any)=>{
+const callback =(data:string)=>{
   console.log("DELETsE an Employee");
 }
 
