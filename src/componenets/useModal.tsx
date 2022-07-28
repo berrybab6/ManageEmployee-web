@@ -8,3 +8,14 @@ export const useModal = () => {
     toggle,
   };
 };
+
+
+export const useUpdateModal = () => {
+
+  const [isUpdateShown, setIsUpdateShown] = useState<boolean>(false);
+  const toggleUpdate = () => setIsUpdateShown(!isUpdateShown);
+  return {
+    isUpdateShown,
+    toggleUpdate,
+  };
+};

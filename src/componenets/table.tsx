@@ -20,7 +20,7 @@ import {
 } from "../store/employee/selectors"
 import { deleteEmpRequest, fetchEmpRequest } from "../store/employee/actions";
 import { connect } from 'react-redux';
-export default function EmployeeTable(props:any){
+export default function EmployeeTable({updateEmp, setUpdateEmp,setEmpId}){
 
  
     function toDate(date:string) {
@@ -41,10 +41,17 @@ export default function EmployeeTable(props:any){
       window.location.reload();
 
     }
+
+
+
+ 
     const [submitted, setSubmitted] = useState(false);
     const [register, setRegister] = useState(false);
 
-   
+    function EditEmp(empId, name, gender, DoB) {
+      setEmpId({id:empId,name:name,gender:gender, DoB:DoB});
+      setUpdateEmp();
+    }
 const DeleteButton = styled(Button)`
   color: red;
   border-color: tomato;
@@ -119,7 +126,14 @@ const start = new Date(Date.now());
                                          <CardStatWrapper>
                                          <CardStats>
       
-                                          <Button >update</Button>
+                                          <Button onClick={()=>{
+                                            EditEmp(
+                                              employees[i]._id,
+                                              employees[i].name,
+                                              employees[i].gender,
+                                              employees[i].DoB
+                                            );
+                                          }}>update</Button>
                                         </CardStats>
                                         <CardStats>
                                           <DeleteButton onClick={()=>{
@@ -147,11 +161,3 @@ const start = new Date(Date.now());
           
                               
 }
-
-// const mapDispatchToProps=(dispatch:any)=>({
-//   deleteE:(params:any)=>{
-//     dispatch(deleteEmpRequest(params))
-//   }
-// })
-
-// export default connect(null, mapDispatchToProps)(EmployeeTable);

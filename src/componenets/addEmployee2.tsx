@@ -11,15 +11,14 @@ import {  Input } from "./forms";
 import { useDispatch, } from "react-redux";
 
 
-import { addEmpRequest, fetchEmpRequest } from "../store/employee/actions";
+import { addEmpRequest, fetchEmpRequest, updateEmpRequest } from "../store/employee/actions";
 
-export default function AddEmployeeForm() {
-    // const { register, handleSubmit, formState: { errors } } = useForm();
+export default function AddEmployeeForm({isShown, isUpdateShown, data}) {
     
     const [inputs, setInputs] = useState({
-        empName: '',
-        salary: 0,
-        gender: ''
+        empName: isUpdateShown?data["name"]:'',
+        salary:isUpdateShown?data["salary"]:0,
+        gender: isUpdateShown?data["gender"]:''
     });
     const [startDate, setStartDate] = useState(new Date());
 
@@ -37,14 +36,34 @@ useEffect(() => {
     
   }, []);
 const callback =(data:any)=>{
-    console.log("an Employee Created Succesfully");
+    if(isShown){
+    console.log("an Employee Created Succesfully");}
+    else if(isUpdateShown){
+        console.log("You Have Updated an Employee Succesfully");
+  }
+    
   }
   
     function handleSubmit(e:any) {
         e.preventDefault();
 
         setSubmitted(true);
-        if (empName && salary && gender) {
+        if(isUpdateShown){
+            dispatch(updateEmpRequest({
+                values:{
+                    id:data["id"],
+                    name:empName?empName:data["name"],
+                    salary:salary==0?data["salary"]:salary,
+                    gender:gender?gender:data["gender"],
+                    DoB:startDate===new Date()?data["DoB"]:startDate
+                },
+                callback
+            }));
+            window.location.reload();
+
+        }
+
+        if (isShown && empName && salary && gender) {
             console.log('hello form is submmitted')
            
             dispatch(addEmpRequest({
@@ -107,7 +126,13 @@ const callback =(data:any)=>{
                     <Button onClick={function (e:any) {
                         handleSubmit(e);}}
                          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
-                        Add Employee
+                       {
+                           isUpdateShown && "Update Employee"
+                       }
+                        {
+                           isShown && "Add Employee"
+                       }
+                        
                     </Button>
 
                 </div>

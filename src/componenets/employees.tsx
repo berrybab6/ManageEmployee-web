@@ -1,8 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {ButtonContainer, Button} from "./button"
 
 import { Modal } from './addEmployee';
-import { useModal } from './useModal';
+import { useModal, useUpdateModal } from './useModal';
 
 import styled from "styled-components";
 
@@ -26,6 +26,8 @@ export default function Employees() {
     }, []);
 
     const { isShown, toggle } = useModal();
+    const { isUpdateShown, toggleUpdate} = useUpdateModal();
+    const [data, setEmpId] = useState({});
     const content = <React.Fragment>Hey, I'm a model.</React.Fragment>;
 
   return (
@@ -36,8 +38,8 @@ export default function Employees() {
           <Button onClick={toggle}>Add Employee</Button>
     </ButtonContainer>
 
-      <Modal isShown={isShown} hide={toggle} modalContent={content} headerText="Hello"/>
-     <EmployeeTable />
+      <Modal isShown={isShown} isUpdateShown={isUpdateShown} hide={(isUpdateShown)?toggleUpdate:toggle}  modalContent={content} headerText="Hello" data={data}/>
+     <EmployeeTable updateEmp={isUpdateShown} setUpdateEmp={toggleUpdate} setEmpId={setEmpId} />
     </LelaContainer>
 
   

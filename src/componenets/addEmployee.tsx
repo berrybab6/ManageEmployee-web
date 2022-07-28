@@ -18,16 +18,21 @@ const message = "this is the validation message";
 
 export interface ModalProps {
   isShown: boolean;
+  isUpdateShown:boolean;
   hide: () => void;
   modalContent: JSX.Element;
   headerText: string;
+  data:{};
 }
 
 export const Modal: FunctionComponent<ModalProps> = ({
   isShown,
+  isUpdateShown,
   hide,
   modalContent,
   headerText,
+  data,
+
 }) => {
   const modal = (
     <React.Fragment>
@@ -35,35 +40,24 @@ export const Modal: FunctionComponent<ModalProps> = ({
       <Wrapper>
         <StyledModal>
           <Header>
-            <HeaderText></HeaderText>
+            <HeaderText>  {isUpdateShown?"Update Employee Information":" Add Employee Form"} </HeaderText>
             <CloseButton onClick={hide}>❌</CloseButton>
           </Header>
-          <Content>
-          Add Employee Form
-           </Content>
+          {/* <Content>
+          
+         
+           </Content> */}
           <Content >
-            <AddEmployeeForm />
-{/* 
-           <FormGroup>
-          <Label htmlFor="label">Name</Label>
-         <Input id="label" />
-          <Message>This is the validation message</Message>
-          </FormGroup>
-           <FormGroup>
-          <Label>Salary</Label>
-            <Input />
-            <Message>This is the validation message</Message>
-        </FormGroup>
-        <FormGroup>
-          <Label>Gender</Label>
-            <Input />
-            <Message>This is the validation message</Message>
-        </FormGroup> */}
+              
+              <AddEmployeeForm isShown = {isShown} isUpdateShown={isUpdateShown} data={data}/>
+            
+            
+
         </Content>
         </StyledModal>
       </Wrapper>
     </React.Fragment>
   );
 
-  return isShown ? ReactDOM.createPortal(modal, document.body) : null;
+  return isShown || isUpdateShown ? ReactDOM.createPortal(modal, document.body) : null;
 };

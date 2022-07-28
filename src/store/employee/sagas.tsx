@@ -41,9 +41,9 @@ const getEmployees = () =>
     return data;
   } 
   
-  const updateEmp= async (payload:{name:string, salary:number, gender:string, DoB:Date}) =>{
+  const updateEmp= async (payload:{id:string,name:string, salary:number, gender:string, DoB:Date}) =>{
     
-    const { data }  = await axios.patch<IEmp>(`http://192.168.0.16:5000/`,{...payload},
+    const { data }  = await axios.patch<IEmp>(`http://192.168.0.16:5000/${payload["id"]}`,{...payload},
     {
       headers:{
         "Content-Type":"application/json",
@@ -136,7 +136,8 @@ function* updateEmpSaga(action:any) {
     console.log("IDDD");
     console.log(action.payload.values);
     const response:{message:string} = yield call(updateEmp,
-      {name:action.payload.values.name,
+      {id:action.payload.values.id,
+      name:action.payload.values.name,
       salary:action.payload.values.salary,
       gender:action.payload.values.gender,
       DoB:action.payload.values.DoB

@@ -116,7 +116,7 @@ export interface AddEmpRequest {
 
   // ################# UPDATE EMPLOYMENT Type and interfaces #########4
 export interface UpdatePayload{
-  values: {name:string,salary:number, gender:string,DoB:Date};
+  values: {id:string,name:string,salary:number, gender:string,DoB:Date};
   callback: any;
 }  
 export interface UpdateEmpRequest {
