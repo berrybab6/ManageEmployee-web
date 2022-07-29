@@ -16,21 +16,26 @@ import { UPDATE_EMP_REQUEST } from "./actionTypes";
 import { IEmp } from "./types";
 
 const getEmployees = () =>
-  axios.get<IEmp[]>("https://employeemanagment-api.herokuapp.com/");
+  // axios.get<IEmp[]>("https://employeemanagment-api.herokuapp.com/");
+  axios.get<IEmp[]>("http://0.0.0.0:9000/");
 
   const deleteE= async (payload:any) =>{
     
     const i= payload["id"]
     const myJSON:string = JSON.stringify(i);
  
-    const message  = await axios.delete<string>(`https://employeemanagment-api.herokuapp.com/${i}`);
-    
+    // const message  = await axios.delete<string>(`https://employeemanagment-api.herokuapp.com/${i}`);
+    const message  = await axios.delete<string>(`http://0.0.0.0:9000/${i}`);
+
+
     return message;
   }
   
   const addEmp= async (payload:{name:string, salary:number, gender:string, DoB:Date}) =>{
     
-    const { data }  = await axios.post<IEmp>(`https://employeemanagment-api.herokuapp.com/`,{...payload},
+    // const { data }  = await axios.post<IEmp>(`https://employeemanagment-api.herokuapp.com/`,{...payload},
+    const { data }  = await axios.post<IEmp>(`http://0.0.0.0:9000/`,{...payload},
+
     {
       headers:{
         "Content-Type":"application/json",
@@ -43,7 +48,9 @@ const getEmployees = () =>
   
   const updateEmp= async (payload:{id:string,name:string, salary:number, gender:string, DoB:Date}) =>{
     
-    const { data }  = await axios.patch<IEmp>(`https://employeemanagment-api.herokuapp.com/${payload["id"]}`,{...payload},
+    // const { data }  = await axios.patch<IEmp>(`https://employeemanagment-api.herokuapp.com/${payload["id"]}`,{...payload},
+    const { data }  = await axios.patch<IEmp>(`http://0.0.0.0:9000/${payload["id"]}`,{...payload},
+
     {
       headers:{
         "Content-Type":"application/json",
