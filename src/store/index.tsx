@@ -11,7 +11,7 @@ const sagaMiddleware = createSagaMiddleware();
 // Mount it on the Store
 const store = createStore(rootReducer, applyMiddleware(sagaMiddleware, logger));
 
-// Run the saga
+// Run the sagass
 sagaMiddleware.run(rootSaga);
 
 export default store;

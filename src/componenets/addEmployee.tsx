@@ -43,10 +43,7 @@ export const Modal: FunctionComponent<ModalProps> = ({
             <HeaderText>  {isUpdateShown?"Update Employee Information":" Add Employee Form"} </HeaderText>
             <CloseButton onClick={hide}>❌</CloseButton>
           </Header>
-          {/* <Content>
-          
-         
-           </Content> */}
+       
           <Content >
               
               <AddEmployeeForm isShown = {isShown} isUpdateShown={isUpdateShown} data={data}/>

@@ -16,21 +16,21 @@ import { UPDATE_EMP_REQUEST } from "./actionTypes";
 import { IEmp } from "./types";
 
 const getEmployees = () =>
-  axios.get<IEmp[]>("http://192.168.0.16:5000/");
+  axios.get<IEmp[]>("https://employeemanagment-api.herokuapp.com/");
 
   const deleteE= async (payload:any) =>{
     
     const i= payload["id"]
     const myJSON:string = JSON.stringify(i);
  
-    const message  = await axios.delete<string>(`http://192.168.0.16:5000/${i}`);
+    const message  = await axios.delete<string>(`https://employeemanagment-api.herokuapp.com/${i}`);
     
     return message;
   }
   
   const addEmp= async (payload:{name:string, salary:number, gender:string, DoB:Date}) =>{
     
-    const { data }  = await axios.post<IEmp>(`http://192.168.0.16:5000/`,{...payload},
+    const { data }  = await axios.post<IEmp>(`https://employeemanagment-api.herokuapp.com/`,{...payload},
     {
       headers:{
         "Content-Type":"application/json",
@@ -43,7 +43,7 @@ const getEmployees = () =>
   
   const updateEmp= async (payload:{id:string,name:string, salary:number, gender:string, DoB:Date}) =>{
     
-    const { data }  = await axios.patch<IEmp>(`http://192.168.0.16:5000/${payload["id"]}`,{...payload},
+    const { data }  = await axios.patch<IEmp>(`https://employeemanagment-api.herokuapp.com/${payload["id"]}`,{...payload},
     {
       headers:{
         "Content-Type":"application/json",
@@ -154,7 +154,7 @@ function* updateEmpSaga(action:any) {
   } catch (e) {
     yield put(
       updateEmpFailure({
-        error:"Unable to Add Employees",
+        error:"Unable to Update Employees",
       })
     );
   }

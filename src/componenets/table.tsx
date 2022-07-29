@@ -78,7 +78,7 @@ const start = new Date(Date.now());
 
   {  return ( error ? (
       <div>Error</div>
-    ) : (
+    ) : (employees.length===0)?<div>Welcome, Start By adding Employees</div>:(
      
        
                 <TableContainer >

@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./styles.css"
 import {
-  getEmpSelector,
+  getEmpSelector, getErrorSelector,
   } from "./store/employee/selectors";
 import { fetchEmpRequest } from "./store/employee/actions";
 import Employees from "./componenets/employees"
@@ -17,6 +17,8 @@ const App = () => {
   align-y:center;
   
   `;
+  const error = useSelector(getErrorSelector);
+
   const dispatch = useDispatch();
   const employees = useSelector(getEmpSelector);
   useEffect(() => {
@@ -25,10 +27,10 @@ const App = () => {
 
   return (
     <div className="App">
-      {employees.length>0? <Employees />:<ErrorM>
+      {error? <ErrorM>
         <h3>Unable to Connect to the Server.
           Please Try Again!!!!!!</h3>
-        </ErrorM>}
+        </ErrorM>:<Employees />}
     
     </div>
   );

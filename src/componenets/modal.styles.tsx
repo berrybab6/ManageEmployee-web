@@ -31,7 +31,6 @@ export const StyledModal = styled.div`
   flex-direction: column;
   padding-left:20px;
   padding-right:20px;
-
   border-radius: 8px;
 `;
 
